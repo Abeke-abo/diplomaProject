@@ -1,0 +1,4 @@
+package com.remotep.backend.auth.dto;
+
+public record UserResponse(Long id, String name, String email, String role) {
+}

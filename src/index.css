@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Добавим плавный скролл для всей страницы */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Базовые стили для более приятного отображения шрифтов */
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

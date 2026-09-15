@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1250" viewBox="0 0 1800 1250">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#0f172a" />
+    </marker>
+    <style>
+      .bg { fill: #f8fafc; }
+      .table { fill: #ffffff; stroke: #0f172a; stroke-width: 3; rx: 16; }
+      .header { fill: #0f172a; }
+      .title { fill: #ffffff; font-family: Arial, sans-serif; font-size: 24px; font-weight: 700; }
+      .field { fill: #0f172a; font-family: Arial, sans-serif; font-size: 19px; }
+      .pk { fill: #b91c1c; font-weight: 700; }
+      .fk { fill: #1d4ed8; font-weight: 700; }
+      .line { stroke: #0f172a; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+      .label { fill: #0f172a; font-family: Arial, sans-serif; font-size: 18px; font-weight: 700; }
+    </style>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1800" height="1250" />
+  <text x="900" y="48" text-anchor="middle" class="field" style="font-size:32px;font-weight:700;">RemoteP PostgreSQL ER Diagram</text>
+
+  <!-- USERS -->
+  <g id="users">
+    <rect class="table" x="680" y="90" width="440" height="330" />
+    <rect class="header" x="680" y="90" width="440" height="58" rx="16" />
+    <text class="title" x="900" y="128" text-anchor="middle">users</text>
+    <text class="field pk" x="710" y="185">PK id : bigint</text>
+    <text class="field" x="710" y="220">name : varchar(100)</text>
+    <text class="field" x="710" y="255">email : varchar(160), unique</text>
+    <text class="field" x="710" y="290">password_hash : varchar</text>
+    <text class="field" x="710" y="325">role : varchar(20)</text>
+    <text class="field" x="710" y="360">created_at : timestamp</text>
+    <text class="field" x="710" y="395">updated_at : timestamp</text>
+  </g>
+
+  <!-- REFRESH TOKENS -->
+  <g id="refresh_tokens">
+    <rect class="table" x="70" y="560" width="430" height="300" />
+    <rect class="header" x="70" y="560" width="430" height="58" rx="16" />
+    <text class="title" x="285" y="598" text-anchor="middle">refresh_tokens</text>
+    <text class="field pk" x="100" y="655">PK id : bigint</text>
+    <text class="field" x="100" y="690">token_hash : varchar(128), unique</text>
+    <text class="field fk" x="100" y="725">FK user_id : bigint</text>
+    <text class="field" x="100" y="760">created_at : timestamp</text>
+    <text class="field" x="100" y="795">expires_at : timestamp</text>
+    <text class="field" x="100" y="830">revoked_at : timestamp</text>
+  </g>
+
+  <!-- CONTACT REQUESTS -->
+  <g id="contact_requests">
+    <rect class="table" x="680" y="540" width="440" height="385" />
+    <rect class="header" x="680" y="540" width="440" height="58" rx="16" />
+    <text class="title" x="900" y="578" text-anchor="middle">contact_requests</text>
+    <text class="field pk" x="710" y="635">PK id : bigint</text>
+    <text class="field" x="710" y="670">name : varchar(120)</text>
+    <text class="field" x="710" y="705">email : varchar(160)</text>
+    <text class="field" x="710" y="740">message : text</text>
+    <text class="field fk" x="710" y="775">FK user_id : bigint, nullable</text>
+    <text class="field" x="710" y="810">status : varchar(30)</text>
+    <text class="field" x="710" y="845">priority : varchar(20)</text>
+    <text class="field" x="710" y="880">created_at : timestamp</text>
+    <text class="field" x="710" y="915">updated_at : timestamp</text>
+  </g>
+
+  <!-- COMMENTS -->
+  <g id="comments">
+    <rect class="table" x="1280" y="510" width="450" height="285" />
+    <rect class="header" x="1280" y="510" width="450" height="58" rx="16" />
+    <text class="title" x="1505" y="548" text-anchor="middle">contact_request_comments</text>
+    <text class="field pk" x="1310" y="605">PK id : bigint</text>
+    <text class="field fk" x="1310" y="640">FK contact_request_id : bigint</text>
+    <text class="field fk" x="1310" y="675">FK admin_id : bigint</text>
+    <text class="field" x="1310" y="710">comment : text</text>
+    <text class="field" x="1310" y="745">created_at : timestamp</text>
+  </g>
+
+  <!-- STATUS HISTORY -->
+  <g id="history">
+    <rect class="table" x="1280" y="875" width="450" height="320" />
+    <rect class="header" x="1280" y="875" width="450" height="58" rx="16" />
+    <text class="title" x="1505" y="913" text-anchor="middle">contact_request_status_history</text>
+    <text class="field pk" x="1310" y="970">PK id : bigint</text>
+    <text class="field fk" x="1310" y="1005">FK contact_request_id : bigint</text>
+    <text class="field fk" x="1310" y="1040">FK changed_by_user_id : bigint</text>
+    <text class="field" x="1310" y="1075">old_status : varchar(30)</text>
+    <text class="field" x="1310" y="1110">new_status : varchar(30)</text>
+    <text class="field" x="1310" y="1145">created_at : timestamp</text>
+  </g>
+
+  <!-- TELEGRAM -->
+  <g id="telegram">
+    <rect class="table" x="680" y="1000" width="440" height="230" />
+    <rect class="header" x="680" y="1000" width="440" height="58" rx="16" />
+    <text class="title" x="900" y="1038" text-anchor="middle">telegram_notifications</text>
+    <text class="field pk" x="710" y="1095">PK id : bigint</text>
+    <text class="field fk" x="710" y="1130">FK contact_request_id : bigint</text>
+    <text class="field" x="710" y="1165">chat_id, status, error_message</text>
+    <text class="field" x="710" y="1200">sent_at, created_at : timestamp</text>
+  </g>
+
+  <!-- SERVICES -->
+  <g id="services">
+    <rect class="table" x="70" y="90" width="450" height="365" />
+    <rect class="header" x="70" y="90" width="450" height="58" rx="16" />
+    <text class="title" x="295" y="128" text-anchor="middle">services</text>
+    <text class="field pk" x="100" y="185">PK id : bigint</text>
+    <text class="field" x="100" y="220">title_ru, title_kz : varchar</text>
+    <text class="field" x="100" y="255">description_ru, description_kz : text</text>
+    <text class="field" x="100" y="290">price_from : numeric</text>
+    <text class="field" x="100" y="325">duration_ru, duration_kz : varchar</text>
+    <text class="field" x="100" y="360">icon_key, sort_order, active</text>
+    <text class="field" x="100" y="395">created_at, updated_at : timestamp</text>
+  </g>
+
+  <!-- PORTFOLIO -->
+  <g id="portfolio">
+    <rect class="table" x="1280" y="90" width="450" height="365" />
+    <rect class="header" x="1280" y="90" width="450" height="58" rx="16" />
+    <text class="title" x="1505" y="128" text-anchor="middle">portfolio_projects</text>
+    <text class="field pk" x="1310" y="185">PK id : bigint</text>
+    <text class="field" x="1310" y="220">title : varchar</text>
+    <text class="field" x="1310" y="255">category_ru, category_kz : varchar</text>
+    <text class="field" x="1310" y="290">description_ru, description_kz : text</text>
+    <text class="field" x="1310" y="325">image_url, technologies</text>
+    <text class="field" x="1310" y="360">project_url, sort_order, active</text>
+    <text class="field" x="1310" y="395">created_at, updated_at : timestamp</text>
+  </g>
+
+  <!-- RELATIONSHIPS -->
+  <path class="line" d="M680 290 C560 330 470 445 350 560" />
+  <text class="label" x="450" y="415">1 user - many refresh tokens</text>
+
+  <path class="line" d="M900 420 L900 540" />
+  <text class="label" x="930" y="488">1 user - many requests</text>
+
+  <path class="line" d="M1120 670 C1180 660 1220 650 1280 645" />
+  <text class="label" x="1135" y="630">1 request - many comments</text>
+
+  <path class="line" d="M1120 820 C1210 875 1215 975 1280 1010" />
+  <text class="label" x="1135" y="930">1 request - many status changes</text>
+
+  <path class="line" d="M900 925 L900 1000" />
+  <text class="label" x="930" y="970">1 request - many Telegram logs</text>
+
+  <path class="line" d="M1120 235 C1210 245 1210 635 1280 675" />
+  <text class="label" x="1135" y="475">admin writes comments</text>
+
+  <path class="line" d="M1120 320 C1230 390 1230 1040 1280 1040" />
+  <text class="label" x="1135" y="710">admin changes statuses</text>
+</svg>
